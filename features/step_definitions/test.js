@@ -1,7 +1,7 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const WordExtractor = require("word-extractor");
 const DocxTemplater = require('docxtemplater');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
@@ -16,7 +16,7 @@ Given('a JSON file named {string}', async function (jsonFileName) {
 Given('a template file named {string}', async function (docxFileName) {
     const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
     const estateFileName = docxFileName.replace('.docx', `-${jsonData.estate.name}.docx`);
-    fileContent = readDocument(file);
+    fileContent = readDocument(docxFilePath);
 });
 
 When('I create file from template using values from the JSON', async function () {
@@ -24,10 +24,11 @@ When('I create file from template using values from the JSON', async function ()
         throw new Error('JSON data or DOCX file not available');
     }
     fileContent = fileContent.replace('oldText', 'newText');
+    console.log(fileContent)
     writeDocument(estateFileName, fileContent);
 });
 
-Then('file {string} is expected:', async function (file, table) {
+Then('file {string} is expected:', function (file, table) {
     content = readDocument(file);
 
     const _table = table.hashes();
