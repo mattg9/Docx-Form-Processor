@@ -5,9 +5,18 @@ const fs = require('fs');
 let jsonData;
 let docxFile;
 
-Given('a JSON file {string} and a template file {string}', function (jsonFileName, docxFileName) {
+Given('a JSON file {string} and a template file {string}', async function (jsonFileName, docxFileName) {
     jsonData = JSON.parse(fs.readFileSync(jsonFileName, 'utf-8'));
     docxFile = fs.readFileSync(docxFileName);
+    console.log(jsonData);
+    console.log(docxFile);
+  });
+
+  When('I modify the template using values from the JSON file', async function () {
+    if (!jsonData || !docxFile) {
+      throw new Error('JSON data or DOCX file not available');
+    }
+    modifyDocx(docxFile, jsonData);
   });
 
 Then('file {string} is expected:', async function (file, table) {
