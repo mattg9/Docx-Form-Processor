@@ -1,7 +1,7 @@
 {
     "estate" : {
         "name": null,
-        "district" : null,
+        "residence" : null,
         "applicant" : null,
         "will" : true,
         "certificate" : null,
