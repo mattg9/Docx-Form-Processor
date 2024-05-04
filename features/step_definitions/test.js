@@ -1,6 +1,7 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const WordExtractor = require("word-extractor");
 const DocxTemplater = require('docxtemplater');
+const PizZip = require('pizzip');
 const fs = require('fs');
 
 const DATA_DIR = 'test/resources/data';
@@ -69,12 +70,10 @@ async function readDocument(file) {
 }
 
 async function writeDocument(file, content) {
-    console.log(file);
-    console.log(content);
-    console.log(templateFile);
     const doc = new DocxTemplater();
     const DOCXBuffer = fs.readFileSync(templateFile);
-    doc.loadZip(DOCXBuffer);
+    const zip = new PizZip(DOCXBuffer);
+    doc.loadZip(zip);
     // doc.setData({
     //     body: content
     // });

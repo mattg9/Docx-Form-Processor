@@ -2,9 +2,10 @@
   "type": "commonjs",
   "devDependencies": {
     "@cucumber/cucumber": "^10.6.0",
+    "docxtemplater": "^3.47.1",
     "fs": "^0.0.1-security",
     "word-extractor": "^1.0.4",
-    "docxtemplater": "^3.47.1"
+    "pizzip": "^3.1.7"
   },
   "name": "your-project",
   "version": "1.0.0",
