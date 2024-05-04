@@ -2,6 +2,14 @@ const { Then } = require("@cucumber/cucumber");
 const WordExtractor = require("word-extractor");
 const fs = require('fs');
 
+let jsonData;
+let docxFile;
+
+Given('a JSON file {string} and a template file {string}', function (jsonFileName, docxFileName) {
+    jsonData = JSON.parse(fs.readFileSync(jsonFileName, 'utf-8'));
+    docxFile = fs.readFileSync(docxFileName);
+  });
+
 Then('file {string} is expected:', async function (file, table) {
     const extractor = new WordExtractor();
     const DOCXBuffer = fs.readFileSync(file);

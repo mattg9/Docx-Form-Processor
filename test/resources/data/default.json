@@ -1,0 +1,42 @@
+{
+    "estate" : {
+        "name": null,
+        "district" : null,
+        "applicant" : null,
+        "will" : true,
+        "certificate" : null,
+        "attachment" : false
+    },
+
+    "entitled": [
+        {
+            "name": null,
+            "reason" : null
+        }
+    ],
+
+    "notEntitled": [
+        {
+            "name": null,
+            "reason" : null
+        }
+    ],
+
+    "affirmed" : null,
+
+    "deponent" : {
+        "name": null,
+        "location" : {
+            "name" : null,
+            "type" : null
+        }
+    },
+
+    "commisioner" : {
+        "name": null,
+        "location" : {
+            "name" : null,
+            "type" : null
+        }
+    }
+}
