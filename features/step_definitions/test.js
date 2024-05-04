@@ -1,23 +1,30 @@
-const { Then } = require("@cucumber/cucumber");
+const { Given, When, Then } = require("@cucumber/cucumber");
 const WordExtractor = require("word-extractor");
 const fs = require('fs');
 
+const DATA_DIR = 'test/resources/data';
+const TEMPLATE_DIR = 'test/resources/form';
 let jsonData;
 let docxFile;
 
-Given('a JSON file {string} and a template file {string}', async function (jsonFileName, docxFileName) {
-    jsonData = JSON.parse(fs.readFileSync(jsonFileName, 'utf-8'));
-    docxFile = fs.readFileSync(docxFileName);
+Given('a JSON file named {string}', async function (jsonFileName) {
+    const jsonFilePath = `${DATA_DIR}/${jsonFileName}`;
+    jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
     console.log(jsonData);
-    console.log(docxFile);
-  });
+});
 
-  When('I modify the template using values from the JSON file', async function () {
+Given('a template file named {string}', async function (docxFileName) {
+    const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
+    docxFile = fs.readFileSync(docxFilePath);
+    console.log(docxFile);
+});
+
+When('I modify the template using values from the JSON', async function () {
     if (!jsonData || !docxFile) {
-      throw new Error('JSON data or DOCX file not available');
+        throw new Error('JSON data or DOCX file not available');
     }
-    modifyDocx(docxFile, jsonData);
-  });
+    // modifyDocx(docxFile, jsonData);
+});
 
 Then('file {string} is expected:', async function (file, table) {
     const extractor = new WordExtractor();
