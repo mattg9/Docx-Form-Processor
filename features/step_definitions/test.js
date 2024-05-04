@@ -32,7 +32,6 @@ When('I create file from template using values from the JSON', async function ()
     fileContent = (jsonData.estate.will) ? 
         fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'with a Will') :
         fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'without a Will');
-    console.log(fileContent);
     writeDocument(estateFile, fileContent);
 });
 
@@ -70,14 +69,17 @@ async function readDocument(file) {
 }
 
 async function writeDocument(file, content) {
+    console.log(file);
+    console.log(content);
+    console.log(templateFile);
     const doc = new DocxTemplater();
     const DOCXBuffer = fs.readFileSync(templateFile);
     doc.loadZip(DOCXBuffer);
-    doc.setData({
-        body: content
-    });
-    doc.render();
-    const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    fs.writeFileSync(file, modifiedDocxBuffer);
-    console.log('Modified document written successfully.');
+    // doc.setData({
+    //     body: content
+    // });
+    // doc.render();
+    // const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
+    // fs.writeFileSync(file, modifiedDocxBuffer);
+    // console.log('Modified document written successfully.');
 }
