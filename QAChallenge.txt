@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------------------------
+The following form contains:
+Opening: Text that can be replaced
+Section 1: Text that can be replaced 
+Section 2: Checkboxes that appear selected or unselected (only 1)
+Section 3: N/A
+Section 4: N/A
+Section 5: Paragraphs that can be shown or hidden
+Section 6: Table containing list of items
+Section 7: Paragraphs that can be shown or hidden, if shown - Table containing list of items
+Closing: Checkboxes followed by optional paragraphs
+
+---------------------------------------------------------------------------------------------
+Describe which section of the form you think is important to automate:
+
+1) Anything that could be prone to human error, and easy for system to validate
+The would include all the text insertions that could be misread from manual verification.
+
+2) Anything that if processed incorrectly would cause the biggest hurdle to the client? 
+Missing text - All placeholders were left in file
+
+---------------------------------------------------------------------------------------------
+Describe which section of the form you think is more efficient to do Manual test and why:
+
+1) Something that could be hard for a system to populate or validate.
+I would say this could include validating the signatures, or the checkboxes.
+For example, the sample 'Then' step definition would not fetch 'x' for a given checked box.
+
+2) Visually inspecting table formats are not clunky (i.e. text wraps nicely)
+
+----------------------------------------------------------------------------------------------
+
+Create 3 different scenarios using Gherkin language
+See test/resources/test.feature for my scenarios
