@@ -1,8 +1,8 @@
 {
     "estate" : {
-        "name": "Matthew",
-        "residence" : "Woodstock",
-        "applicant" : "James",
-        "will" : true
+        "insert name": "Matthew",
+        "insert city or town and county or district of residence" : "Woodstock",
+        "insert \"applicant\", \"lawyer for applicant\", etc." : "James",
+        "insert either \"with a Will\" or \"without a Will\"" : "wit a Will"
     }
 }

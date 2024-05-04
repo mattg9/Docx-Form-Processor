@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
+
 let jsonData;
 let fileContent;
 let templateFile;
@@ -27,13 +28,7 @@ When('I create file from template using values from the JSON', async function ()
     if (!jsonData || !fileContent) {
         throw new Error('JSON data or DOCX file not available');
     }
-    fileContent = fileContent.replace(/\(insert name\)/g, jsonData.estate.name);
-    fileContent = fileContent.replace(/\(insert city or town and county or district of residence\)/g, jsonData.estate.residence);
-    fileContent = fileContent.replace(/\(insert "applicant", "lawyer for applicant", etc.\)/g, jsonData.estate.applicant);
-    fileContent = (jsonData.estate.will) ? 
-        fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'with a Will') :
-        fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'without a Will');
-    writeDocument(estateFile, fileContent);
+    writeDocument(estateFile);
 });
 
 Then('file {string} is expected:', async function (file, table) {
@@ -69,16 +64,14 @@ async function readDocument(file) {
     return content;
 }
 
-async function writeDocument(file, content) {
+async function writeDocument(file) {
     const doc = new DocxTemplater();
     const DOCXBuffer = fs.readFileSync(templateFile);
     const zip = new PizZip(DOCXBuffer);
     doc.loadZip(zip);
-    // doc.setData({
-    //     body: content
-    // });
-    // doc.render();
-    // const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    // fs.writeFileSync(file, modifiedDocxBuffer);
-    // console.log('Modified document written successfully.');
+    doc.setData(jsonData);
+    doc.render();
+    const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
+    fs.writeFileSync(file, modifiedDocxBuffer);
+    console.log('Modified document written successfully.');
 }
