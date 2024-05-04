@@ -20,7 +20,7 @@ Given('a JSON file named {string}', async function (jsonFileName) {
 Given('a template file named {string}', async function (docxFileName) {
     const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
     templateFile = docxFilePath;
-    estateFile = docxFileName.replace('.docx', `-${jsonData.estate.name}.docx`);
+    estateFile = docxFileName.replace('.docx', `-result.docx`);
     fileContent = await readDocument(templateFile);
 });
 
@@ -32,7 +32,7 @@ When('I create file from template using values from the JSON', async function ()
 });
 
 Then('file {string} is expected:', async function (file, table) {
-    content = readDocument(file);
+    content = await readDocument(file);
 
     const _table = table.hashes();
     const errors = [];
@@ -69,7 +69,11 @@ async function writeDocument(file) {
     const DOCXBuffer = fs.readFileSync(templateFile);
     const zip = new PizZip(DOCXBuffer);
     doc.loadZip(zip);
-    doc.setData(jsonData);
+    doc.setData({
+        "insert name": jsonData.estate.name,
+        "insert city or town and county or district of residence" : jsonData.estate.residence,
+        "insert \"applicant\", \"lawyer for applicant\", etc." : jsonData.estate.applicant
+    });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
     fs.writeFileSync(file, modifiedDocxBuffer);
