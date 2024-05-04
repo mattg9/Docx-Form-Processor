@@ -41,7 +41,7 @@ Then('file {string} is expected:', async function (file, table) {
         const value = row['Value'];
         if (expects === 'exists' && !content.includes(value)) {
             errors.push(`"${value}" was expected to exist.`);
-        } else if (expects === 'non exists' && content.includes(value)) {
+        } else if (expects === 'does not exist' && content.includes(value)) {
             errors.push(`"${value}" was expected to not exist.`);
         }
     });
