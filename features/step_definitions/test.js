@@ -1,43 +1,34 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const WordExtractor = require("word-extractor");
+const DocxTemplater = require('docxtemplater');
 const fs = require('fs');
 
 const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
 let jsonData;
-let docxFile;
+let fileContent;
 
 Given('a JSON file named {string}', async function (jsonFileName) {
     const jsonFilePath = `${DATA_DIR}/${jsonFileName}`;
     jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
-    console.log(jsonData);
 });
 
 Given('a template file named {string}', async function (docxFileName) {
     const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
-    docxFile = fs.readFileSync(docxFilePath);
-    console.log(docxFile);
+    const estateFileName = docxFileName.replace('.docx', `-${jsonData.estate.name}.docx`);
+    fileContent = readDocument(file);
 });
 
-When('I modify the template using values from the JSON', async function () {
-    if (!jsonData || !docxFile) {
+When('I create file from template using values from the JSON', async function () {
+    if (!jsonData || !fileContent) {
         throw new Error('JSON data or DOCX file not available');
     }
-    // modifyDocx(docxFile, jsonData);
+    fileContent = fileContent.replace('oldText', 'newText');
+    writeDocument(estateFileName, fileContent);
 });
 
 Then('file {string} is expected:', async function (file, table) {
-    const extractor = new WordExtractor();
-    const DOCXBuffer = fs.readFileSync(file);
-    const extracted = await extractor.extract(DOCXBuffer);
-    const content = extracted
-        .getBody()
-        .split('\n')
-        .filter((line) => /[a-zA-Z0-9]/.test(line))
-        .map((line) => line.replace(/^[ ]+/, ''))
-        .join('');
-
-    console.log(content)
+    content = readDocument(file);
 
     const _table = table.hashes();
     const errors = [];
@@ -55,3 +46,28 @@ Then('file {string} is expected:', async function (file, table) {
         throw new Error(errors.join('\n'));
     }
 });
+
+async function readDocument(file) {
+    const extractor = new WordExtractor();
+    const DOCXBuffer = fs.readFileSync(file);
+    const extracted = await extractor.extract(DOCXBuffer);
+    const content = extracted
+        .getBody()
+        .split('\n')
+        .filter((line) => /[a-zA-Z0-9]/.test(line))
+        .map((line) => line.replace(/^[ ]+/, ''))
+        .join('');
+    return content;
+}
+
+async function writeDocument(file, content) {
+    const doc = new DocxTemplater();
+    doc.loadZip(DOCXBuffer);
+    doc.setData({
+        body: content
+    });
+    doc.render();
+    const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
+    fs.writeFileSync(file, modifiedDocxBuffer);
+    console.log('Modified document written successfully.');
+}
