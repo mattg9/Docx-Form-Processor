@@ -1,0 +1,13 @@
+{
+  "type": "commonjs",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.6.0",
+    "word-extractor": "^1.0.4",
+    "fs": "^0.0.1-security"
+  },
+  "name": "your-project",
+  "version": "1.0.0",
+  "scripts": {
+    "test-cucumber": "cucumber-js test/resources/test.feature --require features/step_definitions"
+  }
+}
