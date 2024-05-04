@@ -26,11 +26,14 @@ When('I create file from template using values from the JSON', async function ()
     if (!jsonData || !fileContent) {
         throw new Error('JSON data or DOCX file not available');
     }
-    fileContent = fileContent.replace('(insert name)', jsonData.estate.name);
-    fileContent = fileContent.replace('(insert city or town and county or district of residence)', jsonData.estate.residence);
-    fileContent = fileContent.replace('(insert “applicant”, “lawyer for applicant”, etc.)', jsonData.estate.applicant);
+    fileContent = fileContent.replace(/\(insert name\)/g, jsonData.estate.name);
+    fileContent = fileContent.replace(/\(insert city or town and county or district of residence\)/g, jsonData.estate.residence);
+    fileContent = fileContent.replace(/\(insert "applicant", "lawyer for applicant", etc.\)/g, jsonData.estate.applicant);
+    fileContent = (jsonData.estate.will) ? 
+        fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'with a Will') :
+        fileContent.replace(/\(insert either "with a Will" or "without a Will"\)/g, 'without a Will');
     console.log(fileContent);
-    await writeDocument(estateFile, fileContent);
+    writeDocument(estateFile, fileContent);
 });
 
 Then('file {string} is expected:', async function (file, table) {
