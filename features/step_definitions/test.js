@@ -7,8 +7,8 @@ const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
 let jsonData;
 let fileContent;
-let templateFileName;
-let estateFileName;
+let templateFile;
+let estateFile;
 
 Given('a JSON file named {string}', async function (jsonFileName) {
     const jsonFilePath = `${DATA_DIR}/${jsonFileName}`;
@@ -17,9 +17,9 @@ Given('a JSON file named {string}', async function (jsonFileName) {
 
 Given('a template file named {string}', async function (docxFileName) {
     const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
-    templateFileName = docxFileName;
-    estateFileName = docxFileName.replace('.docx', `-${jsonData.estate.name}.docx`);
-    fileContent = await readDocument(templateFileName);
+    templateFile = docxFilePath;
+    estateFile = docxFileName.replace('.docx', `-${jsonData.estate.name}.docx`);
+    fileContent = await readDocument(templateFile);
 });
 
 When('I create file from template using values from the JSON', async function () {
@@ -30,7 +30,7 @@ When('I create file from template using values from the JSON', async function ()
     fileContent = fileContent.replace('(insert city or town and county or district of residence)', jsonData.estate.residence);
     fileContent = fileContent.replace('(insert “applicant”, “lawyer for applicant”, etc.)', jsonData.estate.applicant);
     console.log(fileContent);
-    await writeDocument(estateFileName, fileContent);
+    await writeDocument(estateFile, fileContent);
 });
 
 Then('file {string} is expected:', async function (file, table) {
@@ -68,7 +68,7 @@ async function readDocument(file) {
 
 async function writeDocument(file, content) {
     const doc = new DocxTemplater();
-    const DOCXBuffer = fs.readFileSync(templateFileName);
+    const DOCXBuffer = fs.readFileSync(templateFile);
     doc.loadZip(DOCXBuffer);
     doc.setData({
         body: content
