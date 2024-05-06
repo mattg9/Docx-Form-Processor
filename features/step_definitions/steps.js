@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
+const RESULT_DIR = 'test/resources/result';
 
 let jsonData;
 let fileContent;
@@ -76,6 +77,6 @@ async function writeDocument(file) {
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    fs.writeFileSync(file, modifiedDocxBuffer);
+    fs.writeFileSync(`${RESULT_DIR}/file`, modifiedDocxBuffer);
     console.log('Modified document written successfully.');
 }
