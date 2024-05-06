@@ -33,7 +33,7 @@ When('I create file from template using values from the JSON', async function ()
 });
 
 Then('file {string} is expected:', async function (file, table) {
-    content = await readDocument(file);
+    content = await readDocument(`${RESULT_DIR}/${file}`);
 
     const _table = table.hashes();
     const errors = [];
@@ -77,6 +77,6 @@ async function writeDocument(file) {
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    fs.writeFileSync(`${RESULT_DIR}/file`, modifiedDocxBuffer);
+    fs.writeFileSync(`${RESULT_DIR}/${file}`, modifiedDocxBuffer);
     console.log('Modified document written successfully.');
 }

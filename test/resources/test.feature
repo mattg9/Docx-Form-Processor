@@ -1,6 +1,6 @@
 Feature: Form 74B
 
-  Scenario: Fill in Paragraph 1
+  Scenario: Fill in the estate information for paragraph 1
     Given a JSON file named "estate.json"
     And a template file named "rcp-e-74b-0921.docx"
     When I create file from template using values from the JSON
@@ -16,8 +16,8 @@ Feature: Form 74B
       | Expects        | Value                                            |
       | does not exist | Matthew, of Woodstock, make oath and say/affirm: |
 
-  Scenario: Populate a table 6
-    Given a JSON file named "estate.json"
+  Scenario: Fill in paragraph 6 table with multiple people
+    Given a JSON file named "notEntitled.json"
     And a template file named "rcp-e-74b-0921.docx"
     Then file "rcp-e-74b-0921-paragraph6.docx" is expected:
       | Expects | Value                                            |

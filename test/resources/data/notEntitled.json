@@ -1,0 +1,12 @@
+{
+    "notEntitled": [
+        {
+            "name": "Sally",
+            "reason" : "Because I said so"
+        },
+        {
+            "name": "John",
+            "reason": "Because I don't like them"
+        }
+    ]
+}
