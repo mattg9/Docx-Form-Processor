@@ -1,6 +1,7 @@
 # Node.js dependencies
 node_modules/
 rcp-e-74b-0921-result.docx
+~*.docx
 
 # Maven dependencies
 target/
