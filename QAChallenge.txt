@@ -1,13 +1,13 @@
 ---------------------------------------------------------------------------------------------
 The following form contains:
 Opening: Text that can be replaced
-Section 1: Text that can be replaced 
-Section 2: Checkboxes that appear selected or unselected (only 1)
-Section 3: N/A
-Section 4: N/A
-Section 5: Paragraphs that can be shown or hidden
-Section 6: Table containing list of items
-Section 7: Paragraphs that can be shown or hidden, if shown - Table containing list of items
+Paragraph 1: Text that can be replaced 
+Paragraph 2: Checkboxes that appear selected or unselected (only 1)
+Paragraph 3: N/A
+Paragraph 4: N/A
+Paragraph 5: Paragraphs that can be shown or hidden
+Paragraph 6: Table containing list of items
+Paragraph 7: Paragraphs that can be shown or hidden, if shown - Table containing list of items
 Closing: Checkboxes followed by optional paragraphs
 
 ---------------------------------------------------------------------------------------------
@@ -25,8 +25,9 @@ Describe which section of the form you think is more efficient to do Manual test
 1) Something that could be hard for a system to populate or validate.
 I would say this could include validating the signatures, or the checkboxes.
 For example, the sample 'Then' step definition would not fetch 'x' for a given checked box.
+This would require additional work to automate, however there is only a few checkboxes and possible options to test for.
 
-2) Visually inspecting table formats are not clunky (i.e. text wraps nicely)
+2) Visually inspecting table formats are not clunky (i.e. the text wraps nicely)
 
 ----------------------------------------------------------------------------------------------
 
