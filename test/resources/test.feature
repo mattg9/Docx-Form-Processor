@@ -5,10 +5,11 @@ Feature: Form 74B
     And a template file named "rcp-e-74b-0921.docx"
     When I create file from template using values from the JSON
     Then file "rcp-e-74b-0921-result.docx" is expected:
-      | Expects | Value                                                                                                    |
-      | exists  | IN THE ESTATE OF Matthew, deceased.                                                                      |
-      | exists  | Matthew, of Woodstock, make oath and say/affirm:                                                         |
-      | exists  | I am applicant for a certificate of appointment of estate trustee with a Will in the above-noted estate. |
+      | Expects        | Value                                                                                                    |
+      | exists         | IN THE ESTATE OF Matthew, deceased.                                                                      |
+      | exists         | Matthew, of Woodstock, make oath and say/affirm:                                                         |
+      | exists         | I am applicant for a certificate of appointment of estate trustee with a Will in the above-noted estate. |
+      | does not exist | insert name                                                                                              |
 
   Scenario: Strike paragraph 5 from the form
     Given a JSON file named "without_will.json"
@@ -43,13 +44,3 @@ Feature: Form 74B
       | Name  | Reason               |
       | Sally | Because I said so    |
       | John  | Conflict of Interest |
-
-  # Additional Checks 
-  # Scenario: No placeholders are undefined after processing
-  #   Given a JSON file named "complete_valid_estate.json"
-  #   And a template file named "rcp-e-74b-0921.docx"
-  #   When I create file from template using values from the JSON
-  #   Then file "rcp-e-74b-0921-result.docx" is expected:
-  #     | Expects        | Value                                            |
-  #     | does not exist | undefined                                        |
-  #     | does not exist | insert name                                      |
