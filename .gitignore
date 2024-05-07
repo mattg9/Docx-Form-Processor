@@ -1,19 +1,9 @@
 # Node.js dependencies
 node_modules/
-rcp-e-74b-0921-result.docx
-~*.docx
 
 # Maven dependencies
 target/
 
-# IntelliJ IDEA files
-.idea/
-
-# Eclipse files
-.classpath
-.project
-.settings/
-
-# Operating System Files
-.DS_Store
-Thumbs.db
+# Resource files
+rcp-e-74b-0921-result.docx
+~*.docx
