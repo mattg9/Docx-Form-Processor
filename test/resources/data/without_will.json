@@ -3,6 +3,7 @@
         "name": "Matthew",
         "residence" : "Woodstock",
         "applicant" : "James",
-        "will": false
+        "will": false,
+        "limitation" : false
     }
 }

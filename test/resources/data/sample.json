@@ -3,7 +3,8 @@
         "name": null,
         "residence" : null,
         "applicant" : null,
-        "will" : true,
+        "will": true,
+        "limitation" : false,
         "certificate": null,
         "affirmed" : null
     },

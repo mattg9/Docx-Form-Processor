@@ -9,27 +9,33 @@ const TEMPLATE_DIR = 'test/resources/form';
 const RESULT_DIR = 'test/resources/result';
 
 let jsonData;
-let fileContent;
-let templateFile;
-let estateFile;
+let templateForm;
+const estateForm = "rcp-e-74b-0921-result.docx";
 
 Given('a JSON file named {string}', async function (jsonFileName) {
     const jsonFilePath = `${DATA_DIR}/${jsonFileName}`;
-    jsonData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+    // Check if the file exists
+    if (!fs.existsSync(jsonFilePath)) {
+        throw new Error(`JSON file '${jsonFileName}' does not exist.`);
+    }
+    jsonData = JSON.parse(fs.readFileSync(jsonFilePath));
 });
 
 Given('a template file named {string}', async function (docxFileName) {
     const docxFilePath = `${TEMPLATE_DIR}/${docxFileName}`;
-    templateFile = docxFilePath;
-    estateFile = docxFileName.replace('.docx', `-result.docx`);
-    fileContent = await readDocument(templateFile);
+    // Check if the file exists
+    if (!fs.existsSync(docxFilePath)) {
+        throw new Error(`Template file '${docxFileName}' does not exist.`);
+    }
+    // Check if the file has a .docx extension
+    if (!docxFileName.toLowerCase().endsWith('.docx')) {
+        throw new Error(`Template file '${docxFileName}' is not a .docx file.`);
+    }
+    templateForm = docxFilePath;
 });
 
 When('I create file from template using values from the JSON', async function () {
-    if (!jsonData || !fileContent) {
-        throw new Error('JSON data or DOCX file not available');
-    }
-    writeDocument(estateFile);
+    writeDocument();
 });
 
 Then('file {string} is expected:', async function (file, table) {
@@ -53,11 +59,16 @@ Then('file {string} is expected:', async function (file, table) {
 });
 
 Then('file {string} should not contain the following lines:', async function (file, lines) {
-
     const linesToCheck = lines.split('\n').map(line => line.trim()).join('\n');
     const fileContent = await readDocument(`${RESULT_DIR}/${file}`);
     expect(fileContent).to.not.contain(linesToCheck);
   });
+
+Then('file {string} should contain the following lines:', async function (file, lines) {
+    const linesToCheck = lines.split('\n').map(line => line.trim()).join('\n');
+    const fileContent = await readDocument(`${RESULT_DIR}/${file}`);
+    expect(fileContent).to.contain(linesToCheck);
+});
 
 Then('file {string} should contain the following table:', async function (file, table) {
     content = await readDocument(`${RESULT_DIR}/${file}`);
@@ -90,9 +101,9 @@ async function readDocument(file) {
     return content;
 }
 
-async function writeDocument(file) {
+async function writeDocument() {
     const doc = new DocxTemplater();
-    const DOCXBuffer = fs.readFileSync(templateFile);
+    const DOCXBuffer = fs.readFileSync(templateForm);
     const zip = new PizZip(DOCXBuffer);
     doc.loadZip(zip);
     doc.setData({
@@ -102,6 +113,6 @@ async function writeDocument(file) {
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
-    fs.writeFileSync(`${RESULT_DIR}/${file}`, modifiedDocxBuffer);
+    fs.writeFileSync(`${RESULT_DIR}/${estateForm}`, modifiedDocxBuffer);
     console.log('Modified document written successfully.');
 }
