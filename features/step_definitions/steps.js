@@ -108,10 +108,12 @@ async function writeDocument() {
     const DOCXBuffer = fs.readFileSync(templateForm);
     const zip = new PizZip(DOCXBuffer);
     doc.loadZip(zip);
+    willStatus = (jsonData.estate.will) ? "with a Will" : "without a Will";
     doc.setData({
         "insert name": jsonData.estate.name,
         "insert city or town and county or district of residence" : jsonData.estate.residence,
-        "insert \"applicant\", \"lawyer for applicant\", etc." : jsonData.estate.applicant
+        "insert \"applicant\", \"lawyer for applicant\", etc." : jsonData.estate.role,
+        "insert either \“with a Will\” or \“without a Will\”"  : willStatus
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });

@@ -2,7 +2,7 @@
     "estate" : {
         "name": "Matthew",
         "residence" : "Woodstock",
-        "applicant" : "James",
+        "role" : "lawyer for applicant",
         "will": true,
         "limitation" : false
     }

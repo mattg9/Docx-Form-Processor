@@ -2,6 +2,7 @@
     "estate" : {
         "name": "Matthew",
         "residence" : "Woodstock",
-        "applicant" : "James"
+        "role" : "applicant",
+        "will" : true
     }
 }

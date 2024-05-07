@@ -2,7 +2,7 @@
     "estate" : {
         "name": null,
         "residence" : null,
-        "applicant" : null,
+        "role" : null,
         "will": true,
         "limitation" : false,
         "certificate": null,
