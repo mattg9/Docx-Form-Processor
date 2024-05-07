@@ -26,7 +26,7 @@ Feature: Form 74B
   Scenario: Include paragraph 5 to the form
     Given a JSON file named "will_no_limits.json"
     And a template file named "rcp-e-74b-0921.docx"
-    Then file "rcp-e-74b-0921-paragraph5.docx" should not contain the following lines:
+    Then file "rcp-e-74b-0921-paragraph6.docx" should not contain the following lines:
       """
       a.	an extract of the part or parts of the Will or codicil relating to the gift, or a copy of the Will 
       (and codicil(s), if any), in the case of an application served on or in respect of a person entitled 

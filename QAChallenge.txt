@@ -17,7 +17,7 @@ Describe which section of the form you think is important to automate:
 The would include all the text insertions that could be misread from manual verification.
 
 2) Anything that if processed incorrectly would cause the biggest hurdle to the client? 
-Missing text - All placeholders were left in file
+Missing text - there are placeholders that were not replaced
 
 ---------------------------------------------------------------------------------------------
 Describe which section of the form you think is more efficient to do Manual test and why:
@@ -33,3 +33,19 @@ This would require additional work to automate, however there is only a few chec
 
 Create 3 different scenarios using Gherkin language
 See test/resources/test.feature for my scenarios
+
+I learn best by coding things up and seeing them play out.
+test/resources/data:
+includes a basic sample schema so I could think about the types of inputs to expect
+
+features/step_definitions/steps.js:
+includes a When condition to see one of the ways document might get processed (text replacement)
+
+test/resources/form:
+includes the templates we may need to provide
+
+test/resources/result:
+includes partially processed forms end results to check with my Then conditions.
+
+One would swap out the code in When condition and have it send the template and json to the system for processing.
+I would want to see how I could levarage hooks (@Before, @After, @BeforeAll, @AfterAll) to reduce duplicate setup steps
