@@ -6,7 +6,7 @@ This repository contains a suite of Cucumber tests designed to validate the cont
 ## Getting Started
 To get started with running the tests, follow these steps:
 1. **Install Dependencies**: 
-npm install (packages)
+`npm install <packages>`
 
 2. **Execute Tests**:
 `mvn clean install`
