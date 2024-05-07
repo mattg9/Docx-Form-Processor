@@ -8,12 +8,12 @@ Feature: Form 74B
       | Expects | Value                                                                                                        |
       | exists  | IN THE ESTATE OF Matthew, deceased.                                                                          |
       | exists  | Matthew, of Woodstock, make oath and say/affirm:                                                             |
-      | exists  | 1.	I am applicant for a certificate of appointment of estate trustee with a Will in the above-noted estate. |
+      | exists  | I am applicant for a certificate of appointment of estate trustee with a Will in the above-noted estate. |
 
   Scenario: Strike paragraph 5 from the form
     Given a JSON file named "without_will.json"
     And a template file named "rcp-e-74b-0921.docx"
-    Then file "rcp-e-74b-0921-paragraph5.docx" should not contain the following lines:
+    Then file "rcp-e-74b-0921-omit-paragraph5.docx" should not contain the following lines:
       """
       a.	an extract of the part or parts of the Will or codicil relating to the gift, or a copy of the Will 
       (and codicil(s), if any), in the case of an application served on or in respect of a person entitled 
