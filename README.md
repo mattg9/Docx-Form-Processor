@@ -13,4 +13,4 @@ mvn clean install
 npm run test-cucumber
 
 ## Challenge
-See QAChallenge.txt for solutions to the QAChallenge.pdf for Estateably
+See QAChallenge.txt for solutions to the QAChallenge.pdf from Estateably
