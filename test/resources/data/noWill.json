@@ -1,0 +1,8 @@
+{
+    "estate" : {
+        "name": "Matthew",
+        "residence" : "Woodstock",
+        "applicant" : "James",
+        "will": false
+    }
+}

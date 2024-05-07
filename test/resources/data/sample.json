@@ -4,8 +4,8 @@
         "residence" : null,
         "applicant" : null,
         "will" : true,
-        "certificate" : null,
-        "attachment" : false
+        "certificate": null,
+        "affirmed" : null
     },
 
     "entitled": [
@@ -21,8 +21,6 @@
             "reason" : null
         }
     ],
-
-    "affirmed" : null,
 
     "deponent" : {
         "name": null,

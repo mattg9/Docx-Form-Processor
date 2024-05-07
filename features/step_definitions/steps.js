@@ -52,6 +52,31 @@ Then('file {string} is expected:', async function (file, table) {
     }
 });
 
+Then('file {string} should not contain the following lines:', async function (file, lines) {
+
+    const linesToCheck = lines.split('\n').map(line => line.trim()).join('\n');
+    const fileContent = await readDocument(`${RESULT_DIR}/${file}`);
+    expect(fileContent).to.not.contain(linesToCheck);
+  });
+
+Then('file {string} should contain the following table:', async function (file, table) {
+    content = await readDocument(`${RESULT_DIR}/${file}`);
+
+    const _table = table.hashes();
+    const errors = [];
+    _table.map((row) => {
+        const expects = row['Name'];
+        const value = row['Reason'];
+        if (!content.includes(value)) {
+            errors.push(`"${value}" was expected to exist.`);
+        }
+    });
+
+    if (errors.length) {
+        throw new Error(errors.join('\n'));
+    }
+});
+
 async function readDocument(file) {
     const extractor = new WordExtractor();
     const DOCXBuffer = fs.readFileSync(file);
