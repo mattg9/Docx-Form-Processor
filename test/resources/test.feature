@@ -10,7 +10,7 @@ Feature: Form 74B
   #     | exists         | Matthew, of Woodstock, make oath and say/affirm: |
 
   # Scenario: Strike paragraph 5 from the form
-  #   Given a JSON file named "no_will.json"
+  #   Given a JSON file named "without_will.json"
   #   And a template file named "rcp-e-74b-0921.docx"
   #   Then file "rcp-e-74b-0921-paragraph5.docx" should not contain the following lines:
   #     """
@@ -24,7 +24,7 @@ Feature: Form 74B
   #     """
 
   Scenario: Include paragraph 5 to the form
-    Given a JSON file named "will_no_limits.json"
+    Given a JSON file named "with_will_no_limit.json"
     And a template file named "rcp-e-74b-0921.docx"
     Then file "rcp-e-74b-0921-paragraph6.docx" should contain the following lines:
       """

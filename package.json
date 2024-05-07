@@ -4,8 +4,9 @@
     "@cucumber/cucumber": "^10.6.0",
     "docxtemplater": "^3.47.1",
     "fs": "^0.0.1-security",
+    "pizzip": "^3.1.7",
     "word-extractor": "^1.0.4",
-    "pizzip": "^3.1.7"
+    "chai": "^5.1.0"
   },
   "name": "your-project",
   "version": "1.0.0",

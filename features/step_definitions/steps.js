@@ -1,8 +1,10 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
+const { expect } = require('chai');
 const WordExtractor = require("word-extractor");
 const DocxTemplater = require('docxtemplater');
 const PizZip = require('pizzip');
 const fs = require('fs');
+
 
 const DATA_DIR = 'test/resources/data';
 const TEMPLATE_DIR = 'test/resources/form';
