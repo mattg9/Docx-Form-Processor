@@ -77,10 +77,10 @@ Then('file {string} should contain the following table:', async function (file, 
     const _table = table.hashes();
     const errors = [];
     _table.map((row) => {
-        const expects = row['Name'];
-        const value = row['Reason'];
-        if (!content.includes(value)) {
-            errors.push(`"${value}" was expected to exist.`);
+        const name = row['Name'];
+        const reason = row['Reason'];
+        if (!content.includes(`${name}\t${reason}`)) {
+            errors.push(`"${name}\t${reason}" was expected to exist.`);
         }
     });
 
