@@ -22,7 +22,7 @@ Feature: Form 74B
   Scenario: Fill in paragraph 6 table with multiple people not entitled to be served
     Given a JSON file named "notEntitled.json"
     And a template file named "rcp-e-74b-0921.docx"
-    Then file "rcp-e-74b-0921-paragraph6.docx" should contain the table:
+    Then file "rcp-e-74b-0921-paragraph6.docx" should contain the following table:
       | Name  | Reason               |
       | Sally | Because I said so    |
       | John  | Conflict of Interest |
