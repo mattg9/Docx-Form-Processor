@@ -9,9 +9,9 @@ To get started with running the tests, follow these steps:
 npm install (packages)
 
 2. **Execute Tests**:
-mvn clean install
+`mvn clean install`
 or
-npm run test-cucumber
+`npm run test-cucumber`
 
 ## Challenge
 See QAChallenge.txt for solutions to the QAChallenge.pdf from Estateably
