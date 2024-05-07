@@ -8,18 +8,17 @@ Feature: Form 74B
       | Expects | Value                                                                                                        |
       | exists  | IN THE ESTATE OF Matthew, deceased.                                                                          |
       | exists  | Matthew, of Woodstock, make oath and say/affirm:                                                             |
-      | exists  | I am applicant for a certificate of appointment of estate trustee with a Will in the above-noted estate. |
 
   Scenario: Strike paragraph 5 from the form
     Given a JSON file named "without_will.json"
     And a template file named "rcp-e-74b-0921.docx"
     Then file "rcp-e-74b-0921-omit-paragraph5.docx" should not contain the following lines:
       """
-      an extract of the part or parts of the Will or codicil relating to the gift, or a copy of the Will (and codicil(s), if any), 
-      in the case of an application served on or in respect of a person entitled only to a specified item of property or stated or 
-      determinable amount of money,a copy of the Will (and codicil(s), if any), in the case of an application served or in respect 
-      of any other beneficiary,a copy of the Will (and codicil(s), if any) and a statement of the estimated value of the interest of 
-      a minor or an adult described in the application as lacking capacity, as the case may be, if that value is not disclosed in 
+      an extract of the part or parts of the Will or codicil relating to the gift, or a copy of the Will (and codicil(s), if any),
+      in the case of an application served on or in respect of a person entitled only to a specified item of property or stated or
+      determinable amount of money,a copy of the Will (and codicil(s), if any), in the case of an application served or in respect
+      of any other beneficiary,a copy of the Will (and codicil(s), if any) and a statement of the estimated value of the interest of
+      a minor or an adult described in the application as lacking capacity, as the case may be, if that value is not disclosed in
       the application form, in the case of an application served on the Office of the Children's Lawyer or the Office of the Public Guardian and Trustee
       """
 

@@ -33,8 +33,6 @@ Given('a template file named {string}', async function (docxFileName) {
         throw new Error(`Template file '${docxFileName}' is not a .docx file.`);
     }
     templateForm = docxFilePath;
-    content = await readDocument(templateForm);
-    console.log(content);
 });
 
 When('I create file from template using values from the JSON', async function () {
@@ -62,15 +60,15 @@ Then('file {string} is expected:', async function (file, table) {
 });
 
 Then('file {string} should not contain the following lines:', async function (file, lines) {
-    const linesToCheck = lines.split('\n').map(line => line.trim()).join('\n');
+    const lineToCheck = lines.split('\n').map(line => line.trim()).join(' ');
     const fileContent = await readDocument(`${RESULT_DIR}/${file}`);
-    expect(fileContent).to.not.contain(linesToCheck);
+    expect(fileContent).to.not.contain(lineToCheck);
   });
 
 Then('file {string} should contain the following lines:', async function (file, lines) {
-    const linesToCheck = lines.split('\n').map(line => line.trim()).join('\n');
+    const lineToCheck = lines.split('\n').map(line => line.trim()).join(' ');
     const fileContent = await readDocument(`${RESULT_DIR}/${file}`);
-    expect(fileContent).to.contain(linesToCheck);
+    expect(fileContent).to.contain(lineToCheck);
 });
 
 Then('file {string} should contain the following table:', async function (file, table) {
@@ -101,7 +99,6 @@ async function readDocument(file) {
         .filter((line) => /[a-zA-Z0-9]/.test(line))
         .map((line) => line.replace(/^[ ]+/, ''))
         .join('');
-    console.log(content);
     return content;
 }
 
