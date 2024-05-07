@@ -124,7 +124,7 @@ Then('file {string} should contain the following table:', async function (file, 
 });
 
 /**
- * Asynchronously reads given Word document and extracts its contents.
+ * Reads given Word document and extracts its contents.
  * @param {string} file - Path to the Word document file.
  * @returns {Promise<string>} - Resolves with the extracted content of the document.
  */
@@ -142,7 +142,7 @@ async function readDocument(file) {
 }
 
 /**
- * Asynchronously fills a Word document template with data and writes the modified document to results directory.
+ * Fills a Word document template with data and writes the modified document to results directory.
  */
 async function writeDocument() {
     const doc = new DocxTemplater();
