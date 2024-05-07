@@ -31,6 +31,7 @@ Feature: Form 74B
       | Sally | Because I said so    |
       | John  | Conflict of Interest |
 
+  # Additional Checks 
   # Scenario: No placeholders are undefined after processing
   #   Given a JSON file named "complete_valid_estate.json"
   #   And a template file named "rcp-e-74b-0921.docx"
