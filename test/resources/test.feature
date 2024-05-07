@@ -10,7 +10,21 @@ Feature: Form 74B
       | exists         | Matthew, of Woodstock, make oath and say/affirm: |
 
   Scenario: Strike paragraph 5 from the form
-    Given a JSON file named "noWill.json"
+    Given a JSON file named "no_will.json"
+    And a template file named "rcp-e-74b-0921.docx"
+    Then file "rcp-e-74b-0921-paragraph5.docx" should not contain the following lines:
+      """
+      a.	an extract of the part or parts of the Will or codicil relating to the gift, or a copy of the Will 
+      (and codicil(s), if any), in the case of an application served on or in respect of a person entitled 
+      only to a specified item of property or stated or determinable amount of money,
+      b.	a copy of the Will (and codicil(s), if any), in the case of an application served or in respect of any other beneficiary,
+      c.	a copy of the Will (and codicil(s), if any) and a statement of the estimated value of the interest of a minor or an adult 
+      described in the application as lacking capacity, as the case may be, if that value is not disclosed in the application form, 
+      in the case of an application served on the Office of the Children’s Lawyer or the Office of the Public Guardian and Trustee.
+      """
+
+  Scenario: Include paragraph 5 to the form
+    Given a JSON file named "will_no_limits.json"
     And a template file named "rcp-e-74b-0921.docx"
     Then file "rcp-e-74b-0921-paragraph5.docx" should not contain the following lines:
       """
@@ -24,7 +38,7 @@ Feature: Form 74B
       """
 
   Scenario: Fill in paragraph 6 table with multiple people not entitled to be served
-    Given a JSON file named "notEntitled.json"
+    Given a JSON file named "not_entitled.json"
     And a template file named "rcp-e-74b-0921.docx"
     Then file "rcp-e-74b-0921-paragraph6.docx" should contain the following table:
       | Name  | Reason               |
