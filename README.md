@@ -10,6 +10,7 @@ npm install (packages)
 
 2. **Execute Tests**:
 mvn clean install
+or
 npm run test-cucumber
 
 ## Challenge
