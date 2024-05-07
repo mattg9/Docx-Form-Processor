@@ -119,8 +119,8 @@ async function writeDocument() {
     doc.setData({
         "insert name": jsonData.estate.name,
         "insert city or town and county or district of residence" : jsonData.estate.residence,
-        "insert \"applicant\", \"lawyer for applicant\", etc."  : jsonData.estate.role,
-        "insert either \"with a Will\" or \"without a Will\""  : willStatus
+        "insert “applicant”, “lawyer for applicant”, etc."  : jsonData.estate.role,
+        "insert either “with a Will” or “without a Will”"  : willStatus
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
