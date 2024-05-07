@@ -31,7 +31,8 @@ This would require additional work to automate, however there is only a few chec
 
 ----------------------------------------------------------------------------------------------
 
-Create 3 different scenarios using Gherkin language
+Create 3 different scenarios using Gherkin language:
+
 See test/resources/test.feature for my scenarios
 I wanted coverage of text replacement, text insertion, and text removal
 I've included both an Include and Deletion test for paragraph 5 to avoid a false positive
