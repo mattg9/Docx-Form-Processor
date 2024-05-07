@@ -89,6 +89,11 @@ Then('file {string} should contain the following table:', async function (file, 
     }
 });
 
+/**
+ * Asynchronously reads given Word document and extracts its contents.
+ * @param {string} file - Path to the Word document file.
+ * @returns {Promise<string>} - Resolves with the extracted content of the document.
+ */
 async function readDocument(file) {
     const extractor = new WordExtractor();
     const DOCXBuffer = fs.readFileSync(file);
@@ -102,6 +107,9 @@ async function readDocument(file) {
     return content;
 }
 
+/**
+ * Asynchronously fills a Word document template with data and writes the modified document to results directory.
+ */
 async function writeDocument() {
     const doc = new DocxTemplater();
     const DOCXBuffer = fs.readFileSync(templateForm);
