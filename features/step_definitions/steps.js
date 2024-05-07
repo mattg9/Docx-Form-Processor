@@ -33,6 +33,8 @@ Given('a template file named {string}', async function (docxFileName) {
         throw new Error(`Template file '${docxFileName}' is not a .docx file.`);
     }
     templateForm = docxFilePath;
+    content = await readDocument(templateForm);
+    console.log(content);
 });
 
 When('I create file from template using values from the JSON', async function () {
@@ -99,6 +101,7 @@ async function readDocument(file) {
         .filter((line) => /[a-zA-Z0-9]/.test(line))
         .map((line) => line.replace(/^[ ]+/, ''))
         .join('');
+    console.log(content);
     return content;
 }
 
@@ -111,8 +114,8 @@ async function writeDocument() {
     doc.setData({
         "insert name": jsonData.estate.name,
         "insert city or town and county or district of residence" : jsonData.estate.residence,
-        "insert \"applicant\", \"lawyer for applicant\", etc." : jsonData.estate.role,
-        "insert either \“with a Will\” or \“without a Will\”"  : willStatus
+        "insert \"applicant\", \"lawyer for applicant\", etc."  : jsonData.estate.role,
+        "insert either \"with a Will\" or \"without a Will\""  : willStatus
     });
     doc.render();
     const modifiedDocxBuffer = doc.getZip().generate({ type: 'nodebuffer' });
